@@ -12,20 +12,23 @@ app.config.from_object(config)
 db = SQLAlchemy(app)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    from models import Book
-    # from forms import BookForm
-    posts = Book.query.all()
+    if request.method == 'GET':
+        from models import Book
+        posts = Book.query.all()
 
-    for post in posts:
-        user_id = post.id
-        user_name = post.author
-        user_text = post.text
-        user_date = post.date_created
-        print(post.user_id, post.user_name, post.user_text, post.user_date)
+        for post in posts:
+            user_id = post.id
+            user_name = post.author
+            user_text = post.text
+            user_date = post.date_created
+            print(post.id, post.author, post.text, post.date_created)
 
-    return render_template('home.txt', posts=posts)
+        return render_template('home.txt', posts=posts)
+
+    else:
+        return "Wrong input", 404
 
 
 @app.route('/create', methods=['GET', 'POST'])
@@ -37,14 +40,14 @@ def create():
         form = BookForm(request.form)
 
         if form.validate():
-            post = Book(**fom.data)
+            post = Book(**form.data)
             db.session.add(post)
             db.session.commit()
 
             flash('Post created')
         else:
             flash('Not valid')
-            flash(str(form.errors))
+            # flash(str(form.errors))
     else:
         return 'Page is unavaileble', 404
 

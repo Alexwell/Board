@@ -12,9 +12,8 @@
 
 Посты в блоге:
 {% for item in posts %}
-    Заголовок: {{ item.title }}
-    Автор: {{ item.user.email }}/{{ item.user.username }}/{{ item.user_id }}
+    Автор: {{ item.author }}/{{ item.id }}
     Дата: {{ item.date_created }}
-    Текст: {{ item.content }}
+    Текст: {{ item.text }}
 {% endfor %}
 Конец постов
