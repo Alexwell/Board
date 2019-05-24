@@ -140,3 +140,8 @@ sftp-config.json
 
 # KDE directory preferences
 .directory
+
+###User###
+
+# DB files
+/src/*.db

@@ -6,7 +6,7 @@ from app import db
 
 
 class Book(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincremente=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     author = db.Column(db.String(35))
     text = db.Column(db.String(1000), nullable=False)
     date_created = db.Column(db.Date, default=date.today)
