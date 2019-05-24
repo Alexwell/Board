@@ -11,15 +11,19 @@ app.config.from_object(config)
 
 db = SQLAlchemy(app)
 
+@app.route('/', methods=['GET', 'POST'])
+def index():
+	from models import Book
+	from forms import BookForm
 
 if __name__ == '__main__':
-    from models import *
+    # from models import *
     db.create_all()
 
     # if User.query.count() == 0:
     # 	populate_db()
 
-    users = User.query.all()
-    print(list(map(str, users)))
+    # users = User.query.all()
+    # print(list(map(str, users)))
 
     app.run()
