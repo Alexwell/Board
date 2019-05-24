@@ -28,6 +28,27 @@ def index():
     return render_template('home.txt', posts=posts)
 
 
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+    from models import Book
+    from forms import BookForm
+
+    if request.method == 'POST':
+        form = BookForm(request.form)
+
+        if form.validate():
+            post = Book(**fom.data)
+            db.session.add(post)
+            db.session.commit()
+
+            flash('Post created')
+        else:
+            flash('Not valid')
+            flash(str(form.errors))
+    else:
+        return 'Page is unavaileble', 404
+
+
 if __name__ == '__main__':
     from models import *
     db.create_all()
