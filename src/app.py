@@ -44,22 +44,14 @@ def create():
             db.session.add(post)
             db.session.commit()
 
-            flash('Post created')
+            return ('Post created')
         else:
-            flash('Not valid')
-            # flash(str(form.errors))
+            return ('Not valid')
     else:
-        return 'Page is unavaileble', 404
+        return 'Wrong response', 404
 
 
 if __name__ == '__main__':
     from models import *
     db.create_all()
-
-    # if User.query.count() == 0:
-    # 	populate_db()
-
-    # users = User.query.all()
-    # print(list(map(str, users)))
-
     app.run()
