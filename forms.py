@@ -5,3 +5,8 @@ from wtfforms import fields, validators
 from wtfforms_alchemy import ModelForm
 
 from models import Book
+
+
+class BookForm(ModelForm):
+    class Meta:
+        model = Book
