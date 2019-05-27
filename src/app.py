@@ -25,7 +25,7 @@ def index():
             user_date = post.date_created
             print(post.id, post.author, post.text, post.date_created)
 
-        return render_template('home.html', posts=posts)
+        return render_template('home.html', posts=posts), 200
 
     else:
         return "Wrong input", 404
@@ -44,12 +44,30 @@ def create():
             db.session.add(post)
             db.session.commit()
 
-            return ('Post created')
+            return ('Post created'), 200
         else:
-            return ('Not valid')
+            return ('Not valid'), 200
     else:
         return 'Wrong response', 404
 
+@app.route('/comment', methods=['GET', 'POST'])
+def comment():
+    from models import Book, Comments
+    from forms import BookForm, CommentForm
+
+    if request.method == 'POST':
+        form = CommentForm(request.form)
+
+        if form.validate():
+            post = Comments(**form.data)
+            db.session.add(post)
+            db.session.commit()
+
+            return ('Comment created'), 200
+        else:
+            return ('Not valid comment'), 200
+    else:
+        return render_template('add_comment.html',), 200
 
 if __name__ == '__main__':
     from models import *
