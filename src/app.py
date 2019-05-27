@@ -25,7 +25,7 @@ def index():
             user_date = post.date_created
             print(post.id, post.author, post.text, post.date_created)
 
-        return render_template('home.txt', posts=posts)
+        return render_template('home.html', posts=posts)
 
     else:
         return "Wrong input", 404

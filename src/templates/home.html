@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .posts {
+            width: 1000px; 
+        }
+
+        .container {
+            border: 2px solid #aaa;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .title, .date, .id {
+            background-color: #ccc;
+            border: 1px solid green;
+            padding: 0px 10px 0 10px;
+            margin:10px 0 10px 0;
+        }
+
+        .title {
+            font-weight: bold;
+        }
+
+        .main-form {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="posts">
+        {% for item in posts %}
+        <div class="container">
+            <p class="title">{{ item.author }}</p>
+            <p class="date">{{ item.date_created }}</p>
+            <p class="id">{{ item.id }}</p>
+            <div class="content">{{ item.text }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <form class="main-form" action="http://127.0.0.1:5000/create" method="POST">
+        <input type="text" title="author" name="author">name
+        <input type="text" title="text" name="text">content
+        <input type="submit" name="go">
+    </form>
+</body>
+</html>

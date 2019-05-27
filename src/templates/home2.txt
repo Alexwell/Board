@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <div class="posts">
+        <div class="container">
+            <p class="title">Post name</p>
+            <p class="date">20-11-2019</p>
+            <p class="id">777</p>
+            <div class="content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam iusto cumque maiores consectetur officia repellendus, dolorem hic blanditiis. Quidem dolore cupiditate tempore sunt eius. Animi aspernatur iste, impedit possimus velit?</div>
+        </div>
+    </div>
+    <form class="main-form" action="http://127.0.0.1:5000/create" method="POST">
+        <input type="text" title="author" name="author">name
+        <input type="text" title="text" name="text">content
+        <input type="submit" name="go">
+    </form>
+</body>
+</html>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        Сообщения:
+            {% for category, message in messages %}
+                Категория: {{ category }}
+                Сообщение: {{ message }}
+            {% endfor %}
+        Конец сообщений
+    {% endif %}
+{% endwith %}
+
+
+Посты в блоге:
+{% for item in posts %}
+    Автор: {{ item.author }}/{{ item.id }}
+    Дата: {{ item.date_created }}
+    Текст: {{ item.text }}
+{% endfor %}
+Конец постов
