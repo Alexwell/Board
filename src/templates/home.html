@@ -9,10 +9,14 @@
             width: 1000px; 
         }
 
-        .container {
+        .container, .container-comment {
             border: 2px solid #aaa;
             margin-top: 20px;
             margin-bottom: 30px;
+        }
+
+        .container-comment{
+            background-color: #a2a;
         }
 
         .title, .date, .id {
@@ -41,7 +45,7 @@
             <div class="content">{{ item.text }}</div>
             <div class="posts">
              {% for comment in comments %}
-        <div class="container">
+        <div class="container-comment">
             <p class="title">{{ comment.author_comment }}</p>
             <p class="date">{{ comment.date_created_comment }}</p>
             <p class="id">{{ comment.id }}</p>

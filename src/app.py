@@ -17,7 +17,12 @@ def index():
     if request.method == 'GET':
         from models import Book, Comments
         posts = Book.query.all()
+
         comments = Comments.query.all()
+
+        # for com in comments:
+        #     first_id = com.first_id
+            # user = Book.query.filter_by(id=first_id.first())
 
         return render_template('home.html', posts=posts,
                                comments=comments), 200
