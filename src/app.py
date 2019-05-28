@@ -50,24 +50,26 @@ def create():
     else:
         return 'Wrong response', 404
 
+
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
-    from models import Book, Comments
-    from forms import BookForm, CommentForm
+    from models import Comments
+    from forms import CommentForm
 
     if request.method == 'POST':
-        form = CommentForm(request.form)
+        form_comment = CommentForm(request.form)
 
-        if form.validate():
-            post = Comments(**form.data)
-            db.session.add(post)
+        if form_comment.validate():
+            post_comment = Comments(**form_comment.data)
+            db.session.add(post_comment)
             db.session.commit()
 
             return ('Comment created'), 200
         else:
             return ('Not valid comment'), 200
     else:
-        return render_template('add_comment.html',), 200
+        return 'Wrong comment response', 404
+
 
 if __name__ == '__main__':
     from models import *
