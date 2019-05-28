@@ -53,5 +53,16 @@
         <input type="text" title="text_comment" name="text_comment">content_comment
         <input type="submit" name="go_comment">
     </form>
+    <div class="posts">
+        {% for comment in comments %}
+        <div class="container">
+            <p class="title">{{ comment.author_comment }}</p>
+            <p class="date">{{ comment.date_created_comment }}</p>
+            <p class="id">{{ comment.id }}</p>
+            <div class="content">{{ comment.text_comment }}</div>
+            
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>

@@ -15,17 +15,12 @@ db = SQLAlchemy(app)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        from models import Book
+        from models import Book, Comments
         posts = Book.query.all()
+        comments = Comments.query.all()
 
-        for post in posts:
-            user_id = post.id
-            user_name = post.author
-            user_text = post.text
-            user_date = post.date_created
-            print(post.id, post.author, post.text, post.date_created)
-
-        return render_template('home.html', posts=posts), 200
+        return render_template('home.html', posts=posts,
+                               comments=comments), 200
 
     else:
         return "Wrong input", 404
