@@ -15,3 +15,6 @@ class BookForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comments
+        include = [
+            'first_id'
+        ]

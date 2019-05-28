@@ -39,7 +39,16 @@
             <p class="date">{{ item.date_created }}</p>
             <p class="id">{{ item.id }}</p>
             <div class="content">{{ item.text }}</div>
-            
+            <div class="posts">
+             {% for comment in comments %}
+        <div class="container">
+            <p class="title">{{ comment.author_comment }}</p>
+            <p class="date">{{ comment.date_created_comment }}</p>
+            <p class="id">{{ comment.id }}</p>
+            <div class="content">{{ comment.text_comment }}</div>
+        </div>
+             {% endfor %}
+    </div>
         </div>
         {% endfor %}
     </div>
@@ -49,20 +58,11 @@
         <input type="submit" name="go">
     </form>
     <form class="main-form" action="http://127.0.0.1:5000/comment" method="POST">
+        <input type="text" title="first_id" name="first_id">first_id
         <input type="text" title="author_comment" name="author_comment">name_comment
         <input type="text" title="text_comment" name="text_comment">content_comment
         <input type="submit" name="go_comment">
     </form>
-    <div class="posts">
-        {% for comment in comments %}
-        <div class="container">
-            <p class="title">{{ comment.author_comment }}</p>
-            <p class="date">{{ comment.date_created_comment }}</p>
-            <p class="id">{{ comment.id }}</p>
-            <div class="content">{{ comment.text_comment }}</div>
-            
-        </div>
-        {% endfor %}
-    </div>
+
 </body>
 </html>
