@@ -27,8 +27,9 @@ class Comments(db.Model):
     first_id = db.Column(
         db.Integer,
         db.ForeignKey('book.id'),
-        nullable=False,
-        index=True,
+        # nullable=False,
+        # index=True,
+        # default=1
     )
     # first = db.relationship(Book, foreign_keys=[first_id, ])
 

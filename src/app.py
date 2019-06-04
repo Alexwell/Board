@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 import config as config
 
-
 app = Flask(__name__, template_folder='templates')
 app.config.from_object(config)
 
@@ -19,16 +18,14 @@ def index():
         posts = Book.query.all()
 
         comments = Comments.query.all()
-        print(comment)
+        # print(comment)
 
-        for c in comments:
-            print(f'id: {c.id}   first_id: {c.first_id}')
-
-
+        # for c in comments:
+        #     print(f'id: {c.id}   first_id: {c.first_id}')
 
         # for com in comments:
         #     first_id = com.first_id
-            # user = Book.query.filter_by(id=first_id.first())
+        # user = Book.query.filter_by(id=first_id.first())
 
         return render_template('home.html', posts=posts,
                                comments=comments), 200
@@ -63,21 +60,26 @@ def comment():
     from forms import CommentForm
 
     if request.method == 'POST':
+
         form_comment = CommentForm(request.form)
 
         if form_comment.validate():
+            print(form_comment.data)
+
             post_comment = Comments(**form_comment.data)
             db.session.add(post_comment)
             db.session.commit()
+            return (f"{form_comment.data['first_id']} Comment created"), 200
 
-            return ('Comment created'), 200
         else:
             return ('Not valid comment'), 200
+
     else:
         return 'Wrong comment response', 404
 
 
 if __name__ == '__main__':
     from models import *
+
     db.create_all()
     app.run()
