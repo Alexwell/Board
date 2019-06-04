@@ -11,6 +11,7 @@ class Book(db.Model):
     text = db.Column(db.String(1000), nullable=False)
     date_created = db.Column(db.Date, default=date.today, nullable=False)
     is_visible = db.Column(db.Boolean, default=True, nullable=False)
+    post_comments = db.relationship('Comments', backref='post_comments', lazy='dynamic')
 
     def __str__(self):
         return '<Author %r text - %s>' % (self.author, self.text)
@@ -29,7 +30,7 @@ class Comments(db.Model):
         nullable=False,
         index=True,
     )
-    first = db.relationship(Book, foreign_keys=[first_id, ])
+    # first = db.relationship(Book, foreign_keys=[first_id, ])
 
     def __str__(self):
         return '<Author %r text - %s>' % (self.author_comment,

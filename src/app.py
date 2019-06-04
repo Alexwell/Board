@@ -19,6 +19,12 @@ def index():
         posts = Book.query.all()
 
         comments = Comments.query.all()
+        print(comment)
+
+        for c in comments:
+            print(f'id: {c.id}   first_id: {c.first_id}')
+
+
 
         # for com in comments:
         #     first_id = com.first_id

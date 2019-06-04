@@ -45,12 +45,14 @@
             <div class="content">{{ item.text }}</div>
             <div class="posts">
              {% for comment in comments %}
-        <div class="container-comment">
-            <p class="title">{{ comment.author_comment }}</p>
-            <p class="date">{{ comment.date_created_comment }}</p>
-            <p class="id">{{ comment.id }}</p>
-            <div class="content">{{ comment.text_comment }}</div>
-        </div>
+                 {% if  item.id == comment.first_id %}
+                <div class="container-comment">
+                    <p class="title">{{ comment.author_comment }}</p>
+                    <p class="date">{{ comment.date_created_comment }}</p>
+                    <p class="id">{{ comment.id }}</p>
+                    <div class="content">{{ comment.text_comment }}</div>
+                </div>
+                 {% endif %}
              {% endfor %}
     </div>
         </div>
