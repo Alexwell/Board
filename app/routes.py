@@ -1,20 +1,14 @@
 # -*- coding: utf-8 -*-
-
-from flask import Flask, request, render_template, flash
-from flask_sqlalchemy import SQLAlchemy
-
-import config as config
-
-app = Flask(__name__, template_folder='templates')
-app.config.from_object(config)
-
-db = SQLAlchemy(app)
+from flask import render_template, request, flash, redirect, url_for
+from app import app, db
+from app.forms import BookForm, CommentForm
+from app.models import Book, Comments
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        from models import Book, Comments
+        # from app.models import Book, Comments
         posts = Book.query.all()
 
         comments = Comments.query.all()
@@ -31,13 +25,13 @@ def index():
                                comments=comments), 200
 
     else:
-        return "Wrong input", 404
+        return "Wrong input!!", 404
 
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    from models import Book
-    from forms import BookForm
+    # from models import Book
+    # from forms import BookForm
 
     if request.method == 'POST':
         form = BookForm(request.form)
@@ -47,17 +41,15 @@ def create():
             db.session.add(post)
             db.session.commit()
 
-            return ('Post created'), 200
+            return 'Post created', 200
         else:
-            return ('Not valid'), 200
+            return 'Not valid!', 200
     else:
         return 'Wrong response', 404
 
 
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
-    from models import Comments
-    from forms import CommentForm
 
     if request.method == 'POST':
 
@@ -69,17 +61,12 @@ def comment():
             post_comment = Comments(**form_comment.data)
             db.session.add(post_comment)
             db.session.commit()
-            return (f"{form_comment.data['first_id']} Comment created"), 200
+            return f"{ form_comment.data['first_id']} Comment created", 200
 
         else:
-            return ('Not valid comment'), 200
+            return 'Not valid comment !!', 200
 
     else:
         return 'Wrong comment response', 404
 
 
-if __name__ == '__main__':
-    from models import *
-
-    db.create_all()
-    app.run()

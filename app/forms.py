@@ -4,7 +4,7 @@
 # from wtforms import fields, validators
 from wtforms_alchemy import ModelForm
 
-from models import Book, Comments
+from app.models import Book, Comments
 
 
 class BookForm(ModelForm):

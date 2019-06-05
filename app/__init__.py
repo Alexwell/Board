@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+
+from flask import Flask, request, render_template
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config.from_object(Config)
+
+db = SQLAlchemy(app)
+
+from app.models import *
+
+db.create_all()
+
+from app import routes, models
