@@ -45,7 +45,7 @@
             <p class="db-id">{{ item.id }}</p>
             <div class="content">{{ item.text }}</div>
             <form class="main-form" action="http://127.0.0.1:5000/comment" method="POST">
-                <input type="text" title="first_id" name="first_id" value="{{ item.id }}">first_id
+                <input type="hidden" title="first_id" name="first_id" value="{{ item.id }}">first_id
                 <input type="text" title="author_comment" name="author_comment">name_comment
                 <input type="text" title="text_comment" name="text_comment">content_comment
                 <input type="submit" name="go_comment">
