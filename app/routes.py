@@ -8,21 +8,11 @@ from app.models import Book, Comments
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        # from app.models import Book, Comments
         posts = Book.query.all()
 
         comments = Comments.query.all()
-        # print(comment)
 
-        # for c in comments:
-        #     print(f'id: {c.id}   first_id: {c.first_id}')
-
-        # for com in comments:
-        #     first_id = com.first_id
-        # user = Book.query.filter_by(id=first_id.first())
-
-        return render_template('home.html', posts=posts,
-                               comments=comments), 200
+        return render_template('home.html', posts=posts, comments=comments), 200
 
     else:
         return "Wrong input!!", 404
@@ -30,9 +20,6 @@ def index():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    # from models import Book
-    # from forms import BookForm
-
     if request.method == 'POST':
         form = BookForm(request.form)
 
@@ -50,7 +37,6 @@ def create():
 
 @app.route('/comment', methods=['GET', 'POST'])
 def comment():
-
     if request.method == 'POST':
 
         form_comment = CommentForm(request.form)
@@ -61,7 +47,7 @@ def comment():
             post_comment = Comments(**form_comment.data)
             db.session.add(post_comment)
             db.session.commit()
-            return f"{ form_comment.data['first_id']} Comment created", 200
+            return f"{form_comment.data['first_id']} Comment created", 200
 
         else:
             return 'Not valid comment !!', 200
@@ -70,3 +56,15 @@ def comment():
         return 'Wrong comment response', 404
 
 
+@app.route('/single_comment/<int:post_id>', methods=['GET', 'POST'])
+def single_comment(post_id):
+    if request.method == 'GET':
+        comments = Comments.query.filter_by(
+            first_id=post_id
+        )
+
+        return render_template('single_comment.html',
+                               post_id=post_id,
+                               # posts=posts,
+                               comments=comments
+                               ), 200

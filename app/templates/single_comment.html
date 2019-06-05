@@ -38,38 +38,33 @@
 </head>
 <body>
     <div class="posts">
-        {% for item in posts %}
         <div class="container">
-            <p class="title">{{ item.author }}</p>
-            <p class="date">{{ item.date_created }}</p>
-            <p class="db-id">{{ item.id }}</p>
-            <div class="content">{{ item.text }}</div>
-            <a href="http://127.0.0.1:5000/single_comment/{{ item.id }}">Go!!!</a>
+            <p class="title">Title</p>
+            <p class="date">Date</p>
+            <p class="db-id">{{ post_id }}</p>
+            <div class="content">text</div>
             <form class="main-form" action="http://127.0.0.1:5000/comment" method="POST">
-                <input type="hidden" title="first_id" name="first_id" value="{{ item.id }}">first_id
+                <input type="hidden" title="first_id" name="first_id" value="{{ post_id }}">
                 <input type="text" title="author_comment" name="author_comment">name_comment
                 <input type="text" title="text_comment" name="text_comment">content_comment
-                <input type="submit" name="go_comment" value="Comment">
+                <input type="submit" name="go_comment">
             </form>
             <div class="posts">
              {% for comment in comments %}
-                 {% if  item.id == comment.first_id %}
                 <div class="container-comment">
                     <p class="title">{{ comment.author_comment }}</p>
                     <p class="date">{{ comment.date_created_comment }}</p>
                     <p class="db-id">{{ comment.id }}</p>
                     <div class="content">{{ comment.text_comment }}</div>
                 </div>
-                 {% endif %}
              {% endfor %}
     </div>
         </div>
-        {% endfor %}
     </div>
     <form class="main-form" action="http://127.0.0.1:5000/create" method="POST">
         <input type="text" title="author" name="author">name
         <input type="text" title="text" name="text">content
-        <input type="submit" name="go" value="Create Post!">
+        <input type="submit" name="go">
     </form>
 
 </body>
